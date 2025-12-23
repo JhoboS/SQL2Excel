@@ -1,0 +1,5 @@
+{
+  "name": "SQLite to Excel Batch Converter",
+  "description": "A powerful utility to batch upload SQLite database files, inspect schemas with AI, and export tables to Excel spreadsheets directly in the browser.",
+  "requestFramePermissions": []
+}
