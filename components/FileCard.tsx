@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react';
-import { DBFile } from '../types';
-import { exportToExcel } from '../services/excelService';
-import { getAllTablesData } from '../services/sqliteService';
-import { analyzeDatabaseSchema } from '../services/geminiService';
+import { DBFile } from '../types.ts';
+import { exportToExcel } from '../services/excelService.ts';
+import { getAllTablesData } from '../services/sqliteService.ts';
+import { analyzeDatabaseSchema } from '../services/geminiService.ts';
 
 interface Props {
   db: DBFile;

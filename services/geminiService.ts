@@ -1,10 +1,17 @@
 
 import { GoogleGenAI } from "@google/genai";
-import { DBFile } from "../types";
+import { DBFile } from "../types.ts";
 
 export const analyzeDatabaseSchema = async (dbFile: DBFile): Promise<string> => {
   try {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+    // Check if process exists to avoid ReferenceError in some environments
+    const apiKey = typeof process !== 'undefined' ? process.env.API_KEY : '';
+    
+    if (!apiKey) {
+      return "请先配置 API_KEY 环境参数。";
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
     
     const schemaDescription = dbFile.tables.map(t => 
       `Table: ${t.name} (${t.rowCount} rows). Columns: ${t.columns.join(', ')}`
