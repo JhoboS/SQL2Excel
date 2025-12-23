@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react';
-import { DBFile } from '../types.ts';
-import { exportToExcel } from '../services/excelService.ts';
-import { getAllTablesData } from '../services/sqliteService.ts';
-import { analyzeDatabaseSchema } from '../services/geminiService.ts';
+import { DBFile } from '../types';
+import { exportToExcel } from '../services/excelService';
+import { getAllTablesData } from '../services/sqliteService';
+import { analyzeDatabaseSchema } from '../services/geminiService';
 
 interface Props {
   db: DBFile;
@@ -22,7 +22,7 @@ const FileCard: React.FC<Props> = ({ db, onRemove, onUpdate }) => {
       exportToExcel(data, db.name);
     } catch (err) {
       console.error(err);
-      alert("Export failed");
+      alert("导出失败，请检查文件是否损坏。");
     } finally {
       setExporting(false);
     }
@@ -54,7 +54,7 @@ const FileCard: React.FC<Props> = ({ db, onRemove, onUpdate }) => {
               {db.name}
             </h3>
             <p className="text-xs text-slate-500 mt-1">
-              {(db.size / (1024 * 1024)).toFixed(2)} MB • {db.tables.length} tables
+              {(db.size / (1024 * 1024)).toFixed(2)} MB • {db.tables.length} 个表
             </p>
           </div>
         </div>
@@ -69,7 +69,7 @@ const FileCard: React.FC<Props> = ({ db, onRemove, onUpdate }) => {
       </div>
 
       <div className="mt-4 space-y-2">
-        <div className="text-xs font-medium text-slate-400 uppercase tracking-wider">Tables</div>
+        <div className="text-xs font-medium text-slate-400 uppercase tracking-wider">数据表预览</div>
         <div className="flex flex-wrap gap-2">
           {db.tables.slice(0, 5).map((t, idx) => (
             <span key={idx} className="px-2 py-1 bg-slate-100 text-slate-600 rounded text-[10px] border border-slate-200">
@@ -77,7 +77,7 @@ const FileCard: React.FC<Props> = ({ db, onRemove, onUpdate }) => {
             </span>
           ))}
           {db.tables.length > 5 && (
-            <span className="text-[10px] text-slate-400 pt-1">+{db.tables.length - 5} more</span>
+            <span className="text-[10px] text-slate-400 pt-1">等共 {db.tables.length} 个</span>
           )}
         </div>
       </div>

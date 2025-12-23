@@ -1,17 +1,10 @@
 
 import { GoogleGenAI } from "@google/genai";
-import { DBFile } from "../types.ts";
+import { DBFile } from "../types";
 
 export const analyzeDatabaseSchema = async (dbFile: DBFile): Promise<string> => {
   try {
-    // Check if process exists to avoid ReferenceError in some environments
-    const apiKey = typeof process !== 'undefined' ? process.env.API_KEY : '';
-    
-    if (!apiKey) {
-      return "请先配置 API_KEY 环境参数。";
-    }
-
-    const ai = new GoogleGenAI({ apiKey });
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     
     const schemaDescription = dbFile.tables.map(t => 
       `Table: ${t.name} (${t.rowCount} rows). Columns: ${t.columns.join(', ')}`
@@ -35,6 +28,6 @@ export const analyzeDatabaseSchema = async (dbFile: DBFile): Promise<string> => 
     return response.text || "No analysis generated.";
   } catch (error) {
     console.error("Gemini Analysis Error:", error);
-    return "无法生成分析。请检查您的网络连接或 API 配置。";
+    return "无法生成分析。请确保您已在部署环境中配置了 API_KEY。";
   }
 };

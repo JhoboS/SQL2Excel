@@ -1,8 +1,8 @@
 
 import React, { useState, useCallback } from 'react';
-import { DBFile } from './types.ts';
-import { parseDatabase } from './services/sqliteService.ts';
-import FileCard from './components/FileCard.tsx';
+import { DBFile } from './types';
+import { parseDatabase } from './services/sqliteService';
+import FileCard from './components/FileCard';
 
 const App: React.FC = () => {
   const [files, setFiles] = useState<DBFile[]>([]);

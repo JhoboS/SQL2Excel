@@ -1,7 +1,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
+import App from './App';
 
 const rootElement = document.getElementById('root');
 
@@ -21,7 +21,7 @@ try {
   rootElement.innerHTML = `
     <div style="padding: 20px; color: #721c24; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 8px; font-family: sans-serif;">
       <h2 style="margin-top: 0;">Application Error</h2>
-      <p>Failed to start the application. Please check the console for details.</p>
+      <p>无法启动应用，请查看浏览器控制台 (F12) 了解详情。</p>
       <pre style="white-space: pre-wrap; font-size: 12px;">${error instanceof Error ? error.message : String(error)}</pre>
     </div>
   `;
